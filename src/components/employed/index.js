@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles({
   navBuscarEmpleado: {
-    width: '700px',
+    width: '900px',
     margin: 'auto',
     marginTop: '20px',
     backgroundColor: '#FEFBEA',
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     backgroundColor: '#FEFBEA',
     maxWidth: '350px',
     margin: 'auto',
-    marginTop: '30%',
+    marginTop: '30px',
     padding: '25px 70px 25px 70px',
     borderRadius: '10px'
   }
@@ -50,9 +50,14 @@ export const CardEmployed = ({ listaEmpleados }) => {
               <Typography variant='h4' component='h1'>
                 {empleado.nombre} {empleado.apellido}
               </Typography>
-              <Typography variant='body1' component='p' align='center'>
-                {empleado.rol}
-              </Typography>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant='body1' component='p'>
+                  {empleado.rol}
+                </Typography>
+                <Typography variant='body1' component='p' color={empleado.estado === 'Activo' ? 'green' : 'red'}>
+                  ◉{empleado.estado}
+                </Typography>
+              </div>
             </div>
           </Card>
         ))}

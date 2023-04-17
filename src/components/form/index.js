@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Grid, TextField, Typography, MenuItem } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles({
@@ -31,7 +31,8 @@ const Formulario = ({ guardarEmpleado, props }) => {
   const [empleado, setEmpleado] = useState({
     nombre: '',
     apellido: '',
-    rol: ''
+    rol: '',
+    estado: ''
   })
   const handleChange = (event) => {
     const { value, name } = event.target
@@ -40,7 +41,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
   const onSave = () => {
     if (empleado.nombre !== '') {
       guardarEmpleado([...props, empleado])
-      setEmpleado({ nombre: '', apellido: '', rol: '' })
+      setEmpleado({ nombre: '', apellido: '', rol: '', estado: '' })
     }
   }
   const classes = useStyles()
@@ -85,13 +86,30 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   label='rol'
                   type='text'
                   variant='outlined'
-                  helperText='Ingrese datos'
                   fullWidth
                   required
                   className={classes.camposTexto}
                   onChange={handleChange}
                   value={empleado.rol}
                 />
+              </Grid>
+              <Grid item sm={12}>
+                <TextField
+                  id='estado'
+                  name='estado'
+                  label='estado'
+                  variant='outlined'
+                  fullWidth
+                  required
+                  select
+                  helperText='Ingrese datos'
+                  className={classes.camposTexto}
+                  onChange={handleChange}
+                  value={empleado.estado}
+                >
+                  <MenuItem value='Activo'>Activo</MenuItem>
+                  <MenuItem value='Inactivo'>Inactivo</MenuItem>
+                </TextField>
               </Grid>
               <Grid item sm={12}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

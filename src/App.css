@@ -3,7 +3,7 @@
 }
 
 body {
-  background-image: url('../src/resources/img/wallpaper.jpg');
+  background-image: url('resources/img/wallpaperClouds.jpg');
   margin: 0;
   padding: 0;
   background-size: cover;
