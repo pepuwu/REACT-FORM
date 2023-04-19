@@ -48,7 +48,7 @@ export const CardEmployed = ({ listaEmpleados, search }) => {
   if (listaEmpleados.length > 0) {
     return (
       <Grid container>
-        {listaEmpleados.filter((empleado) => (empleado.nombre).toLowerCase().startsWith(search.toLowerCase()))
+        {listaEmpleados.filter((empleado) => (((empleado.nombre + ' ' + empleado.apellido).includes(search.toLowerCase()))))
           .map((empleado) => (
             <Card key={empleado.id} className={classes.cardEmpleado}>
               <div>
@@ -64,7 +64,7 @@ export const CardEmployed = ({ listaEmpleados, search }) => {
                     component='p'
                     color={empleado.estado === 'Activo' ? 'green' : 'red'}
                   >
-                    ◉{empleado.estado}
+                    ◉ {empleado.estado}
                   </Typography>
                 </div>
               </div>

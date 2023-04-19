@@ -28,6 +28,10 @@ const useStyles = makeStyles({
   }
 })
 const Formulario = ({ guardarEmpleado, props }) => {
+  const [errorMessage, setErrorMessage] = useState(false)
+
+  // const [campoVacio, setCampoVacio] = useState('')
+
   const [empleado, setEmpleado] = useState({
     nombre: '',
     apellido: '',
@@ -39,9 +43,12 @@ const Formulario = ({ guardarEmpleado, props }) => {
     setEmpleado({ ...empleado, [name]: value })
   }
   const onSave = () => {
-    if (empleado.nombre !== '') {
+    if (empleado.nombre !== '' && empleado.apellido !== '' && empleado.rol !== '' && empleado.estado !== null) {
       guardarEmpleado([...props, empleado])
       setEmpleado({ nombre: '', apellido: '', rol: '', estado: '' })
+      setErrorMessage(false)
+    } else {
+      setErrorMessage(true)
     }
   }
   const classes = useStyles()
@@ -62,6 +69,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   fullWidth
                   required
                   className={classes.camposTexto}
+                  error={errorMessage && empleado.nombre === ''}
                   onChange={handleChange}
                   value={empleado.nombre}
                 />
@@ -76,6 +84,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   fullWidth
                   className={classes.camposTexto}
                   onChange={handleChange}
+                  error={errorMessage && empleado.apellido === ''}
                   value={empleado.apellido}
                 />
               </Grid>
@@ -90,8 +99,10 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   required
                   className={classes.camposTexto}
                   onChange={handleChange}
+                  error={errorMessage && empleado.rol === ''}
                   value={empleado.rol}
                 />
+                {empleado.rol === ''}
               </Grid>
               <Grid item sm={12}>
                 <TextField
@@ -105,11 +116,13 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   helperText='Ingrese datos'
                   className={classes.camposTexto}
                   onChange={handleChange}
+                  error={errorMessage && empleado.estado === ''}
                   value={empleado.estado}
                 >
                   <MenuItem value='Activo'>Activo</MenuItem>
                   <MenuItem value='Inactivo'>Inactivo</MenuItem>
                 </TextField>
+                {errorMessage && (<p className='error'> {errorMessage} </p>)}
               </Grid>
               <Grid item sm={12}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
