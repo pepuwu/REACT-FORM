@@ -30,20 +30,23 @@ const useStyles = makeStyles({
 const Formulario = ({ guardarEmpleado, props }) => {
   const [errorMessage, setErrorMessage] = useState(false)
 
-  // const [campoVacio, setCampoVacio] = useState('')
-
   const [empleado, setEmpleado] = useState({
     nombre: '',
     apellido: '',
     rol: '',
     estado: ''
   })
+
+  const validarCampo = (value) => {
+    return value.trim() !== ''
+  }
+
   const handleChange = (event) => {
     const { value, name } = event.target
     setEmpleado({ ...empleado, [name]: value })
   }
   const onSave = () => {
-    if (empleado.nombre !== '' && empleado.apellido !== '' && empleado.rol !== '' && empleado.estado !== null) {
+    if (validarCampo(empleado.nombre) && validarCampo(empleado.apellido) && validarCampo(empleado.rol) && empleado.estado !== null && validarCampo(empleado.estado)) {
       guardarEmpleado([...props, empleado])
       setEmpleado({ nombre: '', apellido: '', rol: '', estado: '' })
       setErrorMessage(false)
@@ -51,6 +54,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
       setErrorMessage(true)
     }
   }
+
   const classes = useStyles()
   return (
     <div className={classes.root}>
@@ -69,7 +73,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   fullWidth
                   required
                   className={classes.camposTexto}
-                  error={errorMessage && empleado.nombre === ''}
+                  error={errorMessage && empleado.nombre.trim() === ''}
                   onChange={handleChange}
                   value={empleado.nombre}
                 />
@@ -84,7 +88,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   fullWidth
                   className={classes.camposTexto}
                   onChange={handleChange}
-                  error={errorMessage && empleado.apellido === ''}
+                  error={errorMessage && empleado.apellido.trim() === ''}
                   value={empleado.apellido}
                 />
               </Grid>
@@ -99,7 +103,7 @@ const Formulario = ({ guardarEmpleado, props }) => {
                   required
                   className={classes.camposTexto}
                   onChange={handleChange}
-                  error={errorMessage && empleado.rol === ''}
+                  error={errorMessage && empleado.rol.trim() === ''}
                   value={empleado.rol}
                 />
                 {empleado.rol === ''}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Card, Grid, TextField, Typography } from '@mui/material'
+import { Box, Card, Chip, Grid, Stack, TextField, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles({
@@ -12,11 +12,13 @@ const useStyles = makeStyles({
   },
   cardEmpleado: {
     backgroundColor: '#FEFBEA',
-    maxWidth: '350px',
+    textAlign: 'center',
+    width: '250px',
     margin: 'auto',
     marginTop: '30px',
     padding: '25px 70px 25px 70px',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    minHeight: '80px'
   }
 })
 
@@ -44,32 +46,29 @@ const SearchEmployee = ({ searchChange }) => {
 }
 export const CardEmployed = ({ listaEmpleados, search }) => {
   const classes = useStyles()
-  console.log({ search })
+  const filteredList = listaEmpleados.filter((empleado) => (((empleado.nombre + ' ' + empleado.apellido).includes(search.toLowerCase()))))
+
   if (listaEmpleados.length > 0) {
     return (
       <Grid container>
-        {listaEmpleados.filter((empleado) => (((empleado.nombre + ' ' + empleado.apellido).includes(search.toLowerCase()))))
-          .map((empleado) => (
-            <Card key={empleado.id} className={classes.cardEmpleado}>
-              <div>
-                <Typography variant='h4' component='h1'>
-                  {empleado.nombre} {empleado.apellido}
+        {filteredList.map((empleado) => (
+          <Card key={empleado.id} className={classes.cardEmpleado}>
+            <div className={classes.cardContent}>
+              <Typography variant='h5' component='h1' style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                {empleado.nombre} {empleado.apellido}
+              </Typography>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '15px' }}>
+                <Typography variant='body1' component='p'>
+                  {empleado.rol}
                 </Typography>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='body1' component='p'>
-                    {empleado.rol}
-                  </Typography>
-                  <Typography
-                    variant='body1'
-                    component='p'
-                    color={empleado.estado === 'Activo' ? 'green' : 'red'}
-                  >
-                    ◉ {empleado.estado}
-                  </Typography>
-                </div>
+                <Stack direction='row' spacing={1}>
+                  <Chip label={empleado.estado} color={empleado.estado === 'Activo' ? 'success' : 'error'} />
+                </Stack>
               </div>
-            </Card>
-          ))}
+            </div>
+          </Card>
+        ))}
       </Grid>
     )
   } else {
