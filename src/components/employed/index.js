@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles'
 const useStyles = makeStyles({
   navBuscarEmpleado: {
     width: '900px',
-    margin: 'auto',
+    marginLeft: '10px',
     marginTop: '20px',
     backgroundColor: '#FEFBEA',
     borderRadius: '10px'
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     backgroundColor: '#FEFBEA',
     textAlign: 'center',
     width: '250px',
-    margin: 'auto',
+    marginLeft: '50px',
     marginTop: '30px',
     padding: '25px 70px 25px 70px',
     borderRadius: '10px',
