@@ -46,7 +46,7 @@ const SearchEmployee = ({ searchChange }) => {
 }
 export const CardEmployed = ({ listaEmpleados, search }) => {
   const classes = useStyles()
-  const filteredList = listaEmpleados.filter((empleado) => (((empleado.nombre + ' ' + empleado.apellido).includes(search.toLowerCase()))))
+  const filteredList = listaEmpleados.filter((empleado) => (((empleado.nombre + ' ' + empleado.apellido).toLowerCase().includes(search.toLowerCase()))))
 
   if (listaEmpleados.length > 0) {
     return (
