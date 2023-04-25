@@ -54,9 +54,11 @@ export const CardEmployed = ({ listaEmpleados, search }) => {
         {filteredList.map((empleado) => (
           <Card key={empleado.id} className={classes.cardEmpleado}>
             <div className={classes.cardContent}>
-              <Typography variant='h5' component='h1' style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                {empleado.nombre} {empleado.apellido}
-              </Typography>
+              <div style={{ display: 'flex', textAlign: 'left' }}>
+                <Typography variant='h5' component='h1' style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                  {empleado.nombre} {empleado.apellido}
+                </Typography>
+              </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '15px' }}>
                 <Typography variant='body1' component='p'>
