@@ -13,10 +13,10 @@ const useStyles = makeStyles({
   cardEmpleado: {
     backgroundColor: '#FEFBEA',
     textAlign: 'center',
-    width: '250px',
+    width: '340px',
     marginLeft: '50px',
     marginTop: '30px',
-    padding: '25px 70px 25px 70px',
+    padding: '25px',
     borderRadius: '10px',
     minHeight: '80px'
   }
